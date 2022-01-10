@@ -1,0 +1,27 @@
+name: reveal-pages
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    name: Generate Pages
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: Create "/docs" directory
+        run: mkdir docs && sudo chmod 777 docs
+
+      - name: Copy Slides
+        run: mkdir .docs && cp -r * .docs && mv .docs docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: main
+          keep_files: true
