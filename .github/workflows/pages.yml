@@ -15,8 +15,8 @@ jobs:
       - name: Create "/docs" directory
         run: mkdir docs && sudo chmod 777 docs
 
-      - name: Copy Slides
-        run: mkdir .docs && cp -r * .docs && mv .docs docs
+      - name: Copy slides
+        run: cp -r * docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
